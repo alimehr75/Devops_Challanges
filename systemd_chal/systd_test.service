@@ -1,0 +1,18 @@
+[Unit]
+Description=Internet Connectivity Service
+
+[Service]
+Type=simple
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=append:/var/log/inetcon.log
+StandardError=inherit
+ExecStart=/bin/bash -c 'exec /usr/bin/python /home/robot/Projects/Yara/Connectivity.py'
+Restart=on-failure
+User=root
+WorkingDirectory=/home/robot/Projects/Yara
+RuntimeDirectoryMode=0755
+
+[Install]
+
+WantedBy=multi-user.target
+
