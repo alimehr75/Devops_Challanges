@@ -3,9 +3,10 @@
 echo -ne "Welcome to Store!\nWhat is your name ? "
 read NAME;sleep 1
 echo -e "Okay Dear $NAME , Here is List Of Options\n"
-#===========================End Welcomming =======================
+# ===========================End Welcomming =======================
 
 # ==============A Dictionary for goods and their price============
+
 declare -A prices
 prices["Pen"]="8000"
 prices["NoteBook"]="20000"
@@ -32,17 +33,21 @@ Total_price=0
 Totla_number=0
 
 function ask {
+  # take number of good 
   echo -n "How Manay Do You Need ? "
   read number
+  # multiple number of goods and their prices
   good_price=$(($number * ${prices[$1]}))
+  # add goods price and their name to a dictionary
   goods[$1]=$(echo -e "$number $1  \tPrice is $good_price")
   let Total_number+=number
   let Total_price+=good_price
 }
 
-# This function is for chceking price
+# ===========This function is for chceking price===================
 
 function price {
+  # 5 % discount to total price if its up to 100000
   if [ $Total_price -ge 100000 ];then
     discount=$(echo "$Total_price * 0.05"|bc -l)
     Total_price=$(echo "$Total_price - $discount" | bc -l)
@@ -52,7 +57,7 @@ function price {
   fi
 }
 
-# a function to check list is empty or not!
+# ========== a function to check list is empty or not! ==============
 
 function check {
   if [ ${#goods[@]} == 0 ];then
@@ -64,7 +69,7 @@ function check {
   
 }
 
-# a function to show chosen stuffs
+# ================ a function to show chosen stuffs =================
 
 function show_list {
   if check;then
@@ -77,9 +82,12 @@ function show_list {
   fi
 }
 
-# main function 
+# =============== main function ======================================
+
 function main1 {
+  # show goods menu and sleep for 1 second
   menu;sleep 1
+  # here user sould choose goods 
   select item1 in "${!prices[@]}"
   do
     case $item1 in
@@ -106,9 +114,10 @@ function main1 {
   done
 }
 
-# This function is for operators
-function main2 {
+# ================ This function is for operators =========================
 
+function main2 {
+  # a list of operators user can choose
   operator_menu=("Show" "Help" "Quit")
 
   function operators {
@@ -121,6 +130,7 @@ function main2 {
     """
 
     }
+    
     select item2 in "${operator_menu[@]}"
     do
       case $item2 in
@@ -141,12 +151,13 @@ function main2 {
 
 }
 
-
+# Running functions 
 main1
 main2
 result1="$(show_list)"
 result2="$(price)"
-# >> /home/$USER/Receipt.log
+
+# write Results in a file 
 echo -e """
 $(date +"%A %d %b %Y At %r")\n
 $result1
@@ -154,5 +165,3 @@ $result2\n
 Have A Nice Day!
 GoodBy!
 """ > /home/$USER/Receipt.log
-#price >> /home/$USER/Receipt.log
-
