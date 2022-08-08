@@ -113,7 +113,10 @@ if agree;then
 	sudo sed -i.default '/^[mysqld]/a default-storage-engine = innodb' /etc/mysql/mysql.conf.d/mysqld.cnf
   sudo sed -i.default '/^default.*innodb$/a innodb_buffer_pool_size = 256M' /etc/mysql/mysql.conf.d/mysqld.cnf
 fi
+# Here sthe mysql service has to restart
+echo "mysql service restarting due to config has been changed "
 
+sudo systemctl restart mysql.service
 
 # Here changing iptables to accept and drop IPs to port 13306.
 
