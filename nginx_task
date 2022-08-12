@@ -1,0 +1,38 @@
+server {
+
+		listen 8580 default_server;
+		listen 443 ssl;
+
+		ssl_certificate /etc/nginx/ssl/example.crt;
+		ssl_certificate_key /etc/nginx/ssl/example.key;
+
+		server_name gholi.com;
+		root /var/www/gholi;
+		index index.html index.htm;
+
+		error_log /var/log/nginx/error_gholi.log;
+		access_log /var/log/nginx/access_gholi.log main;
+
+		location / {
+			try_files $uri $uri/ =404;
+		}
+
+		# here if anything be after search , it will be search by google else goes for search page
+		location /search {
+			rewrite ^(.*)/search(.*)$ http://www.google.com/search?q=$2 permanent;
+
+		}
+
+		location /info {
+			alias /var/www/info;
+
+		}
+
+
+		location /other/ {
+			proxy_pass http://192.168.1.105:4567/;
+		}
+
+
+
+}
