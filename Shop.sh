@@ -1,18 +1,13 @@
 #! /bin/bash
 # ==========================BEGIN Welcomming =====================
-echo -ne "Welcome to Store!\nWhat is your name ? "
-read NAME;sleep 1
+read -p "Welcome to Store!\nWhat is your name ? " NAME;sleep 1
 echo -e "Okay Dear $NAME , Here is List Of Options\n"
 # ===========================End Welcomming =======================
 
 # ==============A Dictionary for goods and their price============
 
 declare -A prices
-prices["Pen"]="8000"
-prices["NoteBook"]="20000"
-prices["Pencil"]="6000"
-prices["Paper"]="90000"
-prices["Done"]="Done is To Finish Choosing!"
+prices=( ["Pen"]="8000" ["NoteBook"]="20000" ["Pencil"]="6000" ["Paper"]="90000" ["Done"]=0 )
 
 #============Show what are there in the Store ====================
 
@@ -34,8 +29,7 @@ Totla_number=0
 
 function ask {
   # take number of good 
-  echo -n "How Manay Do You Need ? "
-  read number
+  read -p "How Manay Do You Need ? " number
   # multiple number of goods and their prices
   good_price=$(($number * ${prices[$1]}))
   # add goods price and their name to a dictionary
