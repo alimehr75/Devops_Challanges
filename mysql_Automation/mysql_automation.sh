@@ -145,7 +145,7 @@ if agree;then
 	if [ $userpass2 eq $userpass1 ];then
 
 		# creating user in mysql
-		echo "CREATE USER '$USER'@'$userip' identified by '$userpass1' REQUIRE SSL;" | sudo mysql -u root -p
+		echo "CREATE USER '$USER'@'$userip' IDENTIFIED BY '$userpass1' REQUIRE SSL;" | sudo mysql -u root -p
 		sleep 2
 		echo "User $USER Created in mysql,Done!" 
 		# give permissions to user
