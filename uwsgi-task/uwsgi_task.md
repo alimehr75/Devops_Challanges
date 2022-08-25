@@ -29,6 +29,8 @@
 ## Nginx Config
 1. At first you need an nginx config in `/etc/nginx/sites-available/gholam.conf ` </br></br>
 
+[Nginx Config file](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/gholam_nginx.conf)
+
 ```
 upstream gholam-project {
         server unix:///var/www/nginx/gholam-project/gholam/config.sock;
@@ -66,7 +68,7 @@ server {
 
 }
 ```
-2. Copy the `/etc/nginx/uwsgi-params` to `/var/www/nginx/gholam-project/gholam/config`
+1. Copy the `/etc/nginx/uwsgi-params` to `/var/www/nginx/gholam-project/gholam/config`
 </br>
 
 3. For collect the static params :</br>
@@ -87,6 +89,9 @@ server {
 ## uWSGI ini for automating the deploy process
 > The ini or conf file is for using it in vassale with emperor or using `uwsgi --ini config-file.ini` </br>
 first this file should be in gholam/config/gholam_uwsgi.ini
+
+[uWSGI Config File](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/gholam_uwsgi.ini)
+
 ```
 [uwsgi]
 
@@ -126,6 +131,7 @@ daemonize    = /var/www/nginx/gholam-project/log/uwsgi-emperor.log
 
 ## Systemd Service Config
 > To control all project with systemctl that just deals with Emperor
+[Systemd Config File](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/emperor.uwsgi.service)
 
 ```
 [Unit]
