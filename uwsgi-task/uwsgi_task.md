@@ -155,3 +155,5 @@ WantedBy=multi-user.target
 ## Now you can see the main django page in your Web-Browser : 
 
 ### **`gholam.com:80/`** or just **`gholam.com`**
+
+![](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Final.png?raw=true)
