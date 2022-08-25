@@ -1,0 +1,15 @@
+[Unit]
+Description=uWSGI Emperor 
+After=network.target
+
+[Service]
+User=wsgiapp
+RuntimeDirectory=uwsgi
+ExecStart=/var/www/nginx/gholam-project/.venv/bin/uwsgi --emperor /var/www/nginx/gholam-project/.venv/vassals --uid www-data --gid www-data 
+Restart=always
+RestartSec=5s
+KillSignal=SIGQUIT
+
+[Install]
+WantedBy=multi-user.target
+

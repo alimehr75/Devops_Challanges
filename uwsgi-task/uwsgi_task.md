@@ -144,6 +144,7 @@ KillSignal=SIGQUIT
 WantedBy=multi-user.target
 
 ```
+![](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Whole_dir.png?raw=true)
 
 ## Now you can see the main django page in your Web-Browser : 
 
