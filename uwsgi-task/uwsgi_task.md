@@ -1,11 +1,11 @@
-# Deploy Django with Nginx and Uwsgi
+# Deploy Django with Nginx and uWSGI
 
 ``` 
 < Web-browser > <--> < Nginx Web-server > <--> < unix socket > <--> < uwsgi > <--> < Django >
 ```
 
 ## Steps : 
-1. At first i need to create a user who has nginx user's permissions </br></br>
+1. At first create a user who has nginx user's permissions </br></br>
     1. `useradd -m -d /home/wsgiapp wsgiapp`
     2. `usermod -s /bin/bash wsgiapp`
     3. `usermod -aG www-data wsgiapp`
@@ -19,10 +19,10 @@
     4. `source .venv/bin/activate`
     5. `pip3 install django`
     6. `pip3 install wheel uwsgi`
-    7. `django-admin start project config` --> at first make a dir named config cuz i need have main settings and config be in a config name dir (its for being clarity)
-    8. `mv config gholam` # here a picture of tree
+    7. `django-admin startproject config` --> at first creat project named config cuz i need have main settings and config files be in a config  dir (its for being clarity)
+    8. `mv config gholam` 
     9. `echo "gholam.com  192.168.4.108" >> /etc/hosts` with root to set a local domain name
-    10. for checking is every thing okay far now ,i need to add the server ip and gholam.com to `gholam/config/settings.py` in `ALLOWED-HOSTS = ['192.168.4.108','gholam.com','www.gholam.com']`
+    10. For checking is every thing okay far now ,add the server ip and gholam.com to `gholam/config/settings.py` in `ALLOWED-HOSTS = ['192.168.4.108','gholam.com','www.gholam.com']`
     11. add static files to project `STATIC_ROOT = Path.joinpath(BASE_DIR,'static/')` 
         > _Note_ : **pathlib** is better than **os** module in python ;)
 
@@ -66,23 +66,26 @@ server {
 
 }
 ```
-2. Copy the `/etc/nginx/uwsgi-params` to `/var/www/nginx/gholam-project/gholam`
+2. Copy the `/etc/nginx/uwsgi-params` to `/var/www/nginx/gholam-project/gholam/config`
 </br>
 
-3. Symlink nginx conf of project : </br>
+3. For collect the static params :</br>
+   `python manage.py collectstatis `
+
+4. Symlink nginx conf  : </br>
 `ln -s /etc/nginx/sites-available/gholam.conf /etc/nginx/sites-enabled/gholam.conf`
 </br>
 
-4. Restart the Nginx service: </br>
-`systemctl restart nginx.service`
+5. Restart the Nginx service: </br>
+   `systemctl restart nginx.service`
 </br>
-5. Now you can see the django main page via : </br>
+6. Now you can see the django main page via : </br>
 `uwsgi --socket config.sock --module config.wsgi` 
 
-    (far now invoke this in your project dir)
+    **Note**: far now invoke this in your project dir
 
 ## uWSGI ini for automating the deploy process
-> The ini or conf file id for using that in vassale with emperor or using the other command </br>
+> The ini or conf file is for using it in vassale with emperor or using `uwsgi --ini config-file.ini` </br>
 first this file should be in gholam/config/gholam_uwsgi.ini
 ```
 [uwsgi]
@@ -118,11 +121,11 @@ daemonize    = /var/www/nginx/gholam-project/log/uwsgi-emperor.log
 1. now we can run the project via : </br>
 `uwsgi --ini gholam_uwsgi.ini` in config dir</br>
 2. link this ini file into python venv in a dir named vassals to govern the uwsgi with Emperor </br>
-   * `mkdir /var/www/nginx/gholam-project/venv/vasslas `</br>
+   * `mkdir /var/www/nginx/gholam-project/.venv/vasslas `</br>
    * `ln -s /var/www/nginx/gholam-project/gholam/config/gholam_uwsgi.ini   /var/www/nginx/gholam-project/.venv/vasslas` </br>
 
-## Here systemd
-> To control all project we should set a systemd config file with uwsgi and emperor 
+## Systemd Service Config
+> To control all project with systemctl that just deals with Emperor
 
 ```
 [Unit]
