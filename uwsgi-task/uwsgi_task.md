@@ -150,6 +150,9 @@ KillSignal=SIGQUIT
 WantedBy=multi-user.target
 
 ```
+start the created service:</br>
+`systemctl start emperor.uwsgi.service`
+
 ![](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Whole_dir.png?raw=true)
 
 ## Now you can see the main django page in your Web-Browser : 
@@ -157,3 +160,48 @@ WantedBy=multi-user.target
 ### **`gholam.com:80/`** or just **`gholam.com`**
 
 ![](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Final.png?raw=true)
+
+
+# More Features 
+
+## SSL configs
+
+> Here We are going to add `ssl` in Nginx with openssl
+1. `mkdir /etc/nginx/ssl && cd /etc/nginx/ssl`
+2. `sudo openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 -keyout private.key -out certificate.crt`
+> now its time to add ssl  and ipv6 config to project's nginx config file.
+3. [Here you can see the changes in nginx config file](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/gholam_nginx.conf)
+4. `systemctl restart nginx`
+5. `systemctl restart emperor.uwsgi.service`</br></br></br>
+![Https1](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Https1.png?raw=true)
+-----
+</br></br></br>
+![Https2](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/HTTPS2.png?raw=true)
+
+</br></br></br>
+
+## Django App Configs
+
+> here we are going to add a django app and create superuser to be able to login to app's admin page.
+1. `cd /var/www/nginx/gholam-project/gholam`
+2. `source /var/www/nginx/gholam-project/.venv/bin/activate`
+3. `python3 manage.py createapp Yara`
+4. `python3 manage.py createsuperuser`</br></br></br>
+![Super user](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/SuperUser.png?raw=true)
+</br></br></br>
+---
+
+> Here is the login page of admin --> gholam.com/admin 
+
+![login to admin page](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Loginpage.png?raw=true)
+
+
+> This is the Admin page that we've just created 
+
+![Admin Page after login](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Admin_pannel.png?raw=true)
+
+> And Here You can see the users section the and `wsgiapp` user that we've just created it ;)
+
+![Users](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Users.png?raw=true)
+
+
