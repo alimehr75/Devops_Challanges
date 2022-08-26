@@ -205,3 +205,24 @@ start the created service:</br>
 ![Users](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Users.png?raw=true)
 
 
+## Yara App 
+
+> Read the document of Django how make an app  [Here](https://docs.djangoproject.com/en/4.1/intro/tutorial01/)
+
+![Question1](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Question1.png?raw=true)
+</br></br></br>
+
+---
+
+</br></br></br>
+
+![Question2](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Question2.png?raw=true)
+
+
+> And the main page when you type `gholam.com` in a Web-Browser
+
+![Home page](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Home_html.png?raw=true)
+
+
+
+
