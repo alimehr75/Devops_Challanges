@@ -153,7 +153,7 @@ WantedBy=multi-user.target
 start the created service:</br>
 `systemctl start emperor.uwsgi.service`
 
-![](https://github.com/alimehr75/Devops_Challanges/blob/main/uwsgi-task/Whole_dir.png?raw=true)
+
 
 ## Now you can see the main django page in your Web-Browser : 
 
