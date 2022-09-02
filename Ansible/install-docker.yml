@@ -1,0 +1,39 @@
+---
+- name: Installing Docker & Docker compose
+  hosts: locals
+  become: true
+  become_user: root
+  tasks:
+   - name: Update OS (CentOS 9)
+     raw: yum update -y && yum install epel-release -y
+     when: ansible_distribution == "CentOS" or ansible_distribution == "Rocky"
+
+   - name: Uninstall old Docker versions
+     command: yum remove "{{item}}"
+     loop:
+      - docker
+      - docker-client
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-engine
+
+   - name: Set up the repository
+     command: "{{item}}" 
+     loop: 
+      - yum install -y yum-utils
+      - yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+   - name: Install Docker Engine
+     command: dnf install -y "{{item}}"
+     loop:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+   - name: Enabling Docker Service
+     service:
+       name: docker
+       state: started
+...

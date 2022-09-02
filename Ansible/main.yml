@@ -1,0 +1,34 @@
+---
+- name: Play Book First
+  hosts: locals
+  become: true
+  become_user: root
+  tasks:
+    #- name: Update OS (Debian Base)
+    #  raw: apt-get update && apt-get upgrade
+    #  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+    #- name: Update OS (RedHat Base Yum)
+    #  raw: yum update -y && yum install epel-release -y
+    #  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Rocky'
+    #- name: Update OS (Redhat Base dnf)
+    #  raw: dnf update -y 
+    #  when: ansible_distribution == 'Fedora'
+   - name: Create a file
+     file:
+       path: /tmp/alimehr.txt
+       owner: root
+       group: root
+       mode: '0755'
+       state: touch
+
+   - name: Copy File
+     copy:
+       remote_src: yes
+       src: /tmp/alimehr.txt
+       dest: /tmp/ansible_alimehr.txt
+   - name: Command
+     command: uname -r
+
+
+... 

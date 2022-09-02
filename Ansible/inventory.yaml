@@ -1,0 +1,18 @@
+---
+controler:
+  hosts:
+    Ubuntu:
+      ansible_connection: local
+
+locals:
+  hosts:
+    Rocky:
+      ansible_host: 192.168.4.103
+      ansible_user: Ali
+      ansible_sudo_pass: ali9567
+        #    Fedora:
+        #      ansible_host: 192.168.4.102
+        #      ansible_user: robot
+        #      ansible_sudo_pass: 9567
+...        
+
