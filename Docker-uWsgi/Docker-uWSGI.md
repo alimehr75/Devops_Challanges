@@ -177,10 +177,16 @@ volumes:
   uwsgi_data:
   web_static:
 ```
-2. sudo docker compose build
-3. sudo docker compose up :
-4. type `Yara-app.com` in your browser you'll see :
-5. type `Yara-app.com/admin` in your browser you'll see :
+2. ### sudo docker compose build </br>
+
+3. ### sudo docker compose up : </br></br>
+![](https://github.com/alimehr75/Devops_Challanges/blob/main/Docker-uWsgi/Docker-compose%20up.png?raw=true)</br></br>
+
+4. ### type `Yara-app.com` in your browser you'll see :</br></br>
+![](https://github.com/alimehr75/Devops_Challanges/blob/main/Docker-uWsgi/Home-page.png?raw=true)</br></br>
+
+5. ### type `Yara-app.com/admin` in your browser you'll see :</br></br>
+![](https://github.com/alimehr75/Devops_Challanges/blob/main/Docker-uWsgi/Admin-page.png?raw=true)
 
 
 
