@@ -48,7 +48,12 @@ PUT salary-for-3-months
         "type": "float"
       },
       "job_title":{
-        "type": "text"
+        "type": "text",
+        "fields": {
+          "keyword":{
+            "type":"keyword"
+          }
+        }
       },
       "age": {
         "type": "integer"
